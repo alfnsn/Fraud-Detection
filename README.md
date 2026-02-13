@@ -1,10 +1,10 @@
-# 🚀 Fraud Detection API - Local Deployment
+# Fraud Detection API - Local Deployment
 
 API untuk deteksi fraud/kecurangan menggunakan KNN model dan TF-IDF dengan FastAPI.
 
 ---
 
-## 📁 File Structure
+## File Structure
 
 ```
 FRAUD DETECTION/
@@ -19,7 +19,7 @@ FRAUD DETECTION/
 
 ---
 
-## 🔧 Setup & Installation
+## Setup & Installation
 
 ### 1. Install Dependencies
 
