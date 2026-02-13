@@ -104,20 +104,8 @@ Request:
 
 ```
 
-Response:
-```bash
-{
-  "text": "...",
-  "prediction": "FRAUD",
-  "is_fraud": true,
-  "fraud_probability": 85.5,
-  "label": 1,
-  "timestamp": "2026-02-13T23:49:46"
-}
-```
-
 ### 5. Model
-• Vectorizer: TfidfVectorizer
-• Classifier: KNeighborsClassifier
-• Training menggunakan GridSearchCV
-• Pipeline disimpan sebagai knn_pipeline.pkl
+- **Vectorizer:** TfidfVectorizer  
+- **Classifier:** KNeighborsClassifier  
+- **Training:** GridSearchCV  
+- **Saved Model:** knn_pipeline.pkl
