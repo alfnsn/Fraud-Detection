@@ -14,6 +14,8 @@ FRAUD DETECTION/
 ├── requirements.txt
 ├── Fraud Detection Training.ipynb
 ├── fraud_dataset_new.csv
+├── index.html
+├── index.js
 └── README.md
 ```
 
