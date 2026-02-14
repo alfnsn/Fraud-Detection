@@ -23,11 +23,10 @@ app.add_middleware(
 )
 
 model = None
-tfidf_vectorizer = None
 model_loaded = False
 
 def load_models():
-    global model, tfidf_vectorizer, model_loaded
+    global model, model_loaded
     
     if model_loaded:
         return True

@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fraud Detection System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+            --card-bg: #1e293b;
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent: #38bdf8;
+            --accent2: #6366f1;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text);
+            font-family: "Inter", sans-serif;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            padding: 3rem 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            padding: 1.8rem;
+            transition: 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-header {
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff !important;
+            border-radius: 14px;
+            padding: 14px;
+            font-size: 0.95rem;
+        }
+
+        .form-control::placeholder {
+            color: var(--muted);
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+        }
+
+        .fixed-textarea {
+            height: 170px;
+            resize: none;
+        }
+
+        .btn-predict {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border: none;
+            border-radius: 14px;
+            padding: 14px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-predict:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.35);
+        }
+
+        .result-card {
+            margin-top: 1rem;
+            background: #172033;
+            border-radius: 16px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .progress {
+            height: 18px;
+            border-radius: 10px;
+            background: #334155;
+        }
+
+        .progress-bar {
+            border-radius: 10px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--card-border);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .api-box {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 12px;
+            border-radius: 12px;
+            color: var(--text);
+        }
+
+        .api-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .online {
+            background: var(--success);
+        }
+
+        .offline {
+            background: var(--danger);
+        }
+
+        .footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .card,
+        .card-body,
+        .card-header,
+        .stat-card,
+        .result-card,
+        .batch-item,
+        .api-box {
+            color: #f1f5f9 !important;
+        }
+
+        .text-muted,
+        small,
+        .form-text {
+            color: #cbd5e1 !important;
+        }
+
+        label,
+        p,
+        span,
+        h6 {
+            color: #e2e8f0 !important;
+        }
+
+        #singleResult,
+        #batchResults {
+            color: #ffffff !important;
+        }
+
+        code {
+            background: rgba(255, 255, 255, 0.08) !important;
+            color: #38bdf8 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress {
+            background: #334155 !important;
+        }
+
+        .badge {
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .bg-light {
+            background: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        .card-body h6 {
+            color: #38bdf8 !important;
+            font-weight: 600;
+        }
+
+        .fixed-textarea {
+            height: 170px;
+            resize: none;
+        }
+
+        .row-eq-height {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .row-eq-height>div {
+            display: flex;
+        }
+
+        .row-eq-height .card {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body button {
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container main-container">
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <h1 class="text-white mb-2">
+                <i class="bi bi-shield-check"></i> Fraud Detection System
+            </h1>
+            <p class="text-white-50">
+                Deteksi percakapan fraud menggunakan AI & Machine Learning
+            </p>
+            <div class="mt-2">
+                <span class="api-status online" id="apiStatus"></span>
+                <small class="text-white" id="apiStatusText">API Connected</small>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="container mb-4" id="statsContainer" style="display:none;">
+            <div class="row justify-content-center g-4">
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="stat-card text-center h-100">
+                        <div class="stat-icon text-primary">
+                            <i class="bi bi-chat-dots"></i>
+                        </div>
+                        <h3 id="totalPredictions">0</h3>
+                        <p class="text-muted mb-0">Total Prediksi</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="stat-card text-center h-100">
+                        <div class="stat-icon text-danger">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <h3 id="fraudCount">0</h3>
+                        <p class="text-muted mb-0">Terdeteksi Fraud</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="stat-card text-center h-100">
+                        <div class="stat-icon text-success">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <h3 id="normalCount">0</h3>
+                        <p class="text-muted mb-0">Normal</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Main -->
+        <div class="row row-eq-height mb-4">
+            <!-- Single Prediction -->
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="bi bi-chat-left-text"></i> Single Prediction
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="singlePredictForm">
+                            <div class="mb-3">
+                                <label for="singleText" class="form-label">Masukkan Teks Percakapan:</label>
+                                <textarea class="form-control" id="singleText"
+                                    placeholder="Contoh: kontak via aplikasi aman komunikasi rahasia"
+                                    required></textarea>
+                                <div class="form-text">
+                                    Masukkan teks percakapan yang ingin dianalisis
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <small class="text-muted">Contoh cepat:</small><br />
+                                <span class="badge bg-danger example-badge me-2 mb-2" onclick="
+                      setExampleText(
+                        'kontak via aplikasi aman komunikasi rahasia',
+                      )
+                    ">
+                                    Fraud 1
+                                </span>
+                                <span class="badge bg-danger example-badge me-2 mb-2" onclick="
+                      setExampleText('transfer uang segera urgent butuh cepat')
+                    ">
+                                    Fraud 2
+                                </span>
+                                <span class="badge bg-success example-badge mb-2" onclick="
+                      setExampleText('belanja online di toko resmi terpercaya')
+                    ">
+                                    Normal 1
+                                </span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-predict w-100" style="margin-top: 20px;">
+                                <i class="bi bi-search"></i> Analisis Sekarang
+                                <span class="spinner-border spinner-border-sm ms-2 loading-spinner d-none"
+                                    id="singleSpinner"></span>
+                            </button>
+                        </form>
+
+                        <!-- Result -->
+                        <div id="singleResult" class="mt-4" style="display: none">
+                            <div class="result-card card">
+                                <div class="card-body">
+                                    <h6 class="text-muted mb-3">Hasil Analisis:</h6>
+
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="fw-bold">Status:</span>
+                                        <span id="singlePrediction" class="badge fraud-badge"></span>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="fw-bold">Probabilitas Fraud:</span>
+                                            <span id="singleProbabilityText" class="fw-bold"></span>
+                                        </div>
+                                        <div class="progress" style="height: 25px">
+                                            <div id="singleProbabilityBar" class="progress-bar" role="progressbar">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <small class="text-muted">
+                                            <i class="bi bi-info-circle"></i>
+                                            Teks: "<span id="singleTextResult" class="fst-italic"></span>"
+                                        </small>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <small class="text-muted">
+                                            <i class="bi bi-clock"></i>
+                                            <span id="singleTimestamp"></span>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batch Prediction -->
+            <div class="col-lg-6 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="bi bi-chat-left-dots"></i> Batch Prediction
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="batchPredictForm">
+                            <div class="mb-3">
+                                <label for="batchText" class="form-label">Masukkan Multiple Teks (satu per
+                                    baris):</label>
+                                <textarea class="form-control" id="batchText" rows="6"
+                                    placeholder="transfer uang segera urgent&#10;belanja online toko resmi&#10;kontak via aplikasi aman"
+                                    required></textarea>
+                                <div class="form-text">
+                                    Setiap baris akan dianalisis terpisah
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-predict w-100">
+                                <i class="bi bi-list-check"></i> Analisis Batch
+                                <span class="spinner-border spinner-border-sm ms-2 loading-spinner d-none"
+                                    id="batchSpinner"></span>
+                            </button>
+                        </form>
+
+                        <!-- Batch Results -->
+                        <div id="batchResults" class="mt-4" style="display: none">
+                            <h6 class="text-muted mb-3">
+                                Hasil Batch (<span id="batchCount">0</span> teks):
+                            </h6>
+                            <div id="batchResultsContainer" class="batch-result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Info -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-info-circle"></i> API Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <h6 class="mb-2">API Endpoint:</h6>
+                        <code id="apiEndpoint" class="d-block p-2 bg-light rounded">http://localhost:5000</code>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="mb-2">Model Info:</h6>
+                        <div class="p-2 bg-light rounded">
+                            <span id="modelInfo">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-sm btn-outline-primary me-2" onclick="checkHealth()">
+                        <i class="bi bi-arrow-repeat"></i> Check Health
+                    </button>
+                    <a href="http://localhost:5000/docs" target="_blank" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-book"></i> API Docs
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="mb-0">
+                <i class="bi bi-shield-check"></i> Fraud Detection System
+            </p>
+            <small>KNN + TF-IDF</small>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

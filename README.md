@@ -49,6 +49,15 @@ Server akan berjalan di:
 http://localhost:5000
 ```
 
+Frontend 
+```bash
+npx serve .
+```
+
+Frontend akan berjalan di:
+```bash
+http://localhost:3000
+```
 
 ### 3. Dokumentasi API (Swagger)
 Buka di browser:
