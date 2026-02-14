@@ -4,6 +4,9 @@ API untuk deteksi fraud/kecurangan menggunakan KNN model dan TF-IDF dengan FastA
 
 ---
 
+![Dashboard](assets/dashboard1.png)
+![Dashboard2](assets/dashboard2.png)
+
 ## File Structure
 
 ```
